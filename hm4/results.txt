@@ -1,0 +1,4 @@
+gio - Average: 33
+nika - Average: 22.6667
+dato - Average: 67
+Best student: dato (67)
