@@ -1,0 +1,473 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+// task 1
+
+class employee {
+    private:
+        string firstname;
+        string lastname;
+        double salary;
+        string position;
+        string department;
+    
+    public:
+    
+    employee (string fname, string lname, double sal, string pos, string depart){
+        firstname = fname;
+        lastname = lname;
+        salary = sal;
+        position = pos;
+        department = depart;
+        
+    }
+    
+    
+    string getfirstname () {
+        return firstname;
+    }
+    
+    void setfirstname (string fname) {
+        firstname = fname;
+    }
+    
+    string getlastname () {
+        return lastname;
+    }
+    
+    void setlastname (string lname) {
+        lastname = lname;
+    }
+    
+    double getsalary() {
+        return salary;
+    }
+    
+    void setsalary(double sal){
+        salary = sal;
+    }
+    
+    string getposition () {
+        return position;
+    }
+    
+    void setposition (string pos) {
+        position = pos;
+    }
+    
+    string getdepartment () {
+        return department;
+    }
+    
+    void setdepartment (string depart) {
+        department = depart;
+    }
+    
+    void printInfo() const {
+        cout << "--- info---\n";
+        cout << "lastName, name: " << lastname << " " << firstname << "\n";
+        cout << "position: " << position << "\n";
+        cout << "department: " << department << "\n";
+        cout << "salary: " << salary << " ₾\n";
+        cout << "-------end----------\n";
+    }
+    
+        void increaseSalary(double percentage) {
+                if (percentage > 0) {
+                    salary += salary * (percentage / 100);
+                    cout << firstname << "increased by " << percentage;
+                } 
+            }
+        };
+            
+
+
+
+
+
+
+int main()
+{
+    employee emp("Albert ", "Einstein", 13000, "theoretical physicist", "physicist");
+    
+    emp.printInfo();
+    
+    emp.increaseSalary(14);
+    
+    emp.printInfo();
+    
+    return 0;
+}
+
+// task 2
+
+
+// task 2
+
+class Product {
+private:
+    string name;
+    string category;
+    double price;
+
+public:
+    
+    Product(string name, string category, double price) {
+        this->name = name;
+        this->category = category;
+        this->price = price;
+    }
+
+    
+    string getName() { 
+        return name; 
+        
+    }
+    string getCategory() { 
+        return category; 
+        
+    }
+    double getPrice() { 
+        return price; 
+        
+    }
+};
+
+
+
+class Order {
+private:
+    
+    vector<pair<Product, int>> items;
+    
+    
+    double totalAmount;
+
+   
+    void calculateTotalAmount() {
+        totalAmount = 0;
+        for (const auto& item : items) {
+            Product prod = item.first;
+            int quantity = item.second;
+            totalAmount += prod.getPrice() * quantity;
+        }
+    }
+
+public:
+    
+    Order(vector<pair<Product, int>> orderItems) {
+        items = orderItems;
+        
+        calculateTotalAmount();
+    }
+
+    
+    double getTotalAmount() const {
+        return totalAmount;
+    }
+
+    
+    void printOrder() const {
+        cout << "============= ORDER DETAILS =============" << endl;
+        cout << "Purchased Products:" << endl;
+        
+        for (const auto& item : items) {
+            Product prod = item.first;
+            int quantity = item.second;
+            
+            cout << " - " << prod.getName() 
+                 << " [" << prod.getCategory() << "] | "
+                 << "Price: " << prod.getPrice() << " | "
+                 << "Quantity: " << quantity << " | "
+                 << "Subtotal: " << prod.getPrice() * quantity << endl;
+        }
+        
+        cout << "-----------------------------------------" << endl;
+        cout << "Total Amount Due: " << totalAmount << endl;
+        cout << "=========================================" << endl;
+    }
+};
+
+int main() {
+    
+    Product p1("Laptop", "Electronics", 1500.0);
+    Product p2("Mouse", "Electronics", 50.0);
+    Product p3("C++ Book", "Education", 35.0);
+
+    
+    vector<pair<Product, int>> myCart;
+    myCart.push_back({p1, 1}); 
+    myCart.push_back({p2, 2}); 
+    myCart.push_back({p3, 3}); 
+
+   
+    Order myOrder(myCart);
+
+   
+    myOrder.printOrder();
+
+    return 0;
+}
+
+
+
+// task 3
+
+class bankaccount {
+private:
+    string accountnumber;
+    double balance;
+        
+public:
+    bankaccount(string accnum, double bal) {
+        accountnumber = accnum;
+        balance = bal;
+    }
+        
+    string getaccountnumber() {
+        return accountnumber;
+    }
+        
+    
+    double getbalance() {
+        return balance;
+    }
+        
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Successfully deposited: " << amount << endl;
+        } 
+    } 
+        
+    void withdraw(double amount) {
+        if (amount > balance) {
+            cout << "Error: Insufficient funds! Current balance is " << balance << endl;
+        } else {
+            balance -= amount;
+            cout << "Successfully withdrew: " << amount << endl;
+        }
+    } // Added missing closing brace
+
+    void displaysummary() const {
+        cout << "---------------------------------" << endl;
+        cout << "Account Number: " << accountnumber << endl; 
+        cout << "Current Balance: " << balance << endl;
+        cout << "---------------------------------" << endl;
+    }
+}; 
+
+int main() { 
+    
+    bankaccount myacc("h34r-rty6", 7685);
+    
+    cout << "Initial Account Status:" << endl;
+    myacc.displaysummary();
+    
+    myacc.deposit(500);
+    cout << "Balance after deposit: " << myacc.getbalance() << endl;
+    
+    myacc.withdraw(200);
+    myacc.withdraw(654);
+    
+    cout << "\nFinal Account Status:" << endl;
+    myacc.displaysummary();
+    
+    return 0;
+}
+
+
+
+// task 4
+
+
+class Student {
+private:
+    string name;
+    string className; 
+    int rollNumber;
+    double marks;
+
+    
+    char calculateGrade() const {
+        if (marks >= 90) return 'A';
+        if (marks >= 80) return 'B';
+        if (marks >= 70) return 'C';
+        if (marks >= 60) return 'D';
+        return 'F';
+    }
+
+public:
+    
+    Student(string sName, string sClass, int sRoll, double sMarks) {
+        name = sName;
+        className = sClass;
+        rollNumber = sRoll;
+        
+    }
+
+    
+    string getName() { 
+        return name;
+    }
+    string getClassName() { 
+        return className; 
+        
+      
+    }
+    int getRollNumber() { 
+        return rollNumber; 
+    }
+    double getMarks() { 
+        return marks; 
+        
+    }
+
+    
+    void displayInformation() const {
+        cout << "------- STUDENT REPORT -----------" << endl;
+        cout << "Name:        " << name << endl;
+        cout << "Class:       " << className << endl;
+        cout << "Roll Number: " << rollNumber << endl;
+        cout << "Marks:       " << marks << "/100" << endl;
+        cout << "Grade:       " << calculateGrade() << endl;
+        cout << "----------------------------------" << endl;
+    }
+};
+
+int main() {
+    
+    Student student1("merab dvalishvili", "Grade 10", 101, 92.5);
+    Student student2("jhon Jones", "Grade 10", 102, 64.0);
+
+    
+    student1.displayInformation();
+    cout << endl; 
+    student2.displayInformation();
+
+    return 0;
+}
+
+
+// task 5
+
+class Shape {
+public:
+    
+    virtual double calculateArea() const = 0;
+    virtual double calculatePerimeter() const = 0;
+
+    
+    virtual ~Shape() {}
+};
+
+
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) {
+        radius = r > 0 ? r : 0;
+    }
+
+  
+    double calculateArea() const override {
+        return M_PI * radius * radius;
+    }
+
+    double calculatePerimeter() const override {
+        return 2 * M_PI * radius;
+    }
+};
+
+
+class Rectangle : public Shape {
+private:
+    double width;
+    double height;
+
+public:
+    Rectangle(double w, double h) {
+        width = w > 0 ? w : 0;
+        height = h > 0 ? h : 0;
+    }
+
+    double calculateArea() const override {
+        return width * height;
+    }
+
+    double calculatePerimeter() const override {
+        return 2 * (width + height);
+    }
+};
+
+
+class Triangle : public Shape {
+private:
+    double sideA, sideB, sideC;
+
+public:
+    Triangle(double a, double b, double c) {
+        
+        if (a + b > c && a + c > b && b + c > a) {
+            sideA = a;
+            sideB = b;
+            sideC = c;
+        } else {
+            cout << "Warning: Invalid triangle sides! Setting sides to 0." << endl;
+            sideA = sideB = sideC = 0;
+        }
+    }
+
+    
+    double calculateArea() const override {
+        double s = (sideA + sideB + sideC) / 2.0; 
+        return sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
+    }
+
+    double calculatePerimeter() const override {
+        return sideA + sideB + sideC;
+    }
+};
+
+
+int main() {
+    
+    Shape* circle = new Circle(5.0);          
+    Shape* rectangle = new Rectangle(4.0, 6.0); 
+    Shape* triangle = new Triangle(3.0, 4.0, 5.0); 
+
+    
+    cout << "--- Circle Details ---" << endl;
+    cout << "Area: " << circle->calculateArea() << endl;
+    cout << "Perimeter: " << circle->calculatePerimeter() << endl << endl;
+
+    
+    cout << "--- Rectangle Details ---" << endl;
+    cout << "Area: " << rectangle->calculateArea() << endl;
+    cout << "Perimeter: " << rectangle->calculatePerimeter() << endl << endl;
+
+    
+    cout << "--- Triangle Details ---" << endl;
+    cout << "Area: " << triangle->calculateArea() << endl;
+    cout << "Perimeter: " << triangle->calculatePerimeter() << endl << endl;
+
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
