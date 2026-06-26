@@ -1,0 +1,175 @@
+#include <vector>
+#include <iostream>
+using namespace std;
+
+
+
+
+// task 1
+int main() {
+    
+    int n;
+    cout << "please enter value of numbers: ";
+    cin >> n;
+    
+    if(n <= 0){
+        cout << "numbers must be valid!!";
+        return 1;
+    }
+    vector<int> numbers(n);
+    cout << "please enter" << n << "numbers";
+    for(int i = 0; i < n; i++){
+        cin >> numbers[i];
+    }
+    
+    int pos = 0;
+    int neg = 0;
+    double sum = 0;
+    
+    for(int num : numbers){
+        if(num > 0) pos++;
+        else if (num < 0) neg++;
+        sum += num;
+    }
+    
+    double avrg = sum / n;
+    
+    cout << "\n---- results ----";
+    cout << "positive count: " << pos;
+    cout << "negative count: " << neg;
+    cout << "average count: " << avrg;
+    cout << "elements which are more than average: ";
+    for(int num : numbers){
+        if(num < avrg){
+            cout << num << "";
+        }
+    }
+    cout << endl;
+    
+
+    return 0;
+}
+
+// task 2
+
+void sort(vector<int> vec1,  vector<int> vec2){
+    vector<int> result;
+    
+    for(int i = 0; i < vec1.size(); i++){
+        result.push_back(vec1[i]);
+        
+    }
+    for(int i = 0; i < vec2.size(); i++){
+        result.push_back(vec2[i]);
+    }
+    
+    for(int i = 0; i < result.size(); i++){
+        for(int j = i + 1; j < result.size(); j++ ){
+            if (result[i] > result[j]){
+                int temp = result[i];
+                result[i] = result[j];
+                result[j] = temp;
+            }
+        }
+    }
+    
+    for(int i = 0; i < result.size(); i++){
+        cout << result[i] << " ";
+        
+        
+    }
+    
+    cout << endl;
+}
+
+int main() {
+        
+    vector<int> v1 = {5, 3, 9};
+    vector<int> v2 = {3, 5, 6};
+
+    sort(v1, v2);
+    return 0;
+}
+
+// task 3
+
+ string s;
+    getline(cin, s);
+    
+    map<char, int> symbols;
+    for (int i = 0, l = (int)s.length(); i < l; i++) {
+        if (s[i] != ' ' && s[i] != '?' && s[i] != '!' && s[i] != '.' && s[i] != ',') {
+            
+            if (symbols.find(s[i]) == symbols.end()) {
+                symbols.insert(make_pair(s[i], 1));
+            } else {
+                symbols.find(s[i])->second++;
+            }
+            
+        }
+    }
+    
+    for (const auto &i : symbols) {
+        cout << i.first << " " << i.second << endl;
+    }
+
+// task 4
+
+#include <vector>
+#include <string>
+#include <iostream>
+#include <set>
+using namespace std;
+
+void printset(const set<int>& s){
+    for(int num : s){
+        cout << num << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    
+    set<int> set1, set2, unionset;
+    int n, m ,element;
+    
+    cout << "please enter first element: ";
+    cin >> n;
+    cout << "plese eneter element: ";
+    for(int i = 0; i < n; ++i){
+        cin >> element;
+        set1.insert(element);
+        
+    }
+    
+    
+    cout << "please enter second element: ";
+    cin >> m;
+    cout << "plese eneter element: ";
+    for(int i = 0; i < m; ++i){
+        cin >> element;
+        set2.insert(element);
+        
+    }
+    
+    
+    unionset = set1;
+    for(int num : set2){
+        unionset.insert(num);
+    }
+    cout << "\n first value: ";
+    printset(set1);
+    
+    cout << "\n second value: ";
+    printset(set2);
+    
+    cout << "\n union value: ";
+    printset(unionset);
+       
+
+    return 0;
+}
+
+// task 5
+
+
